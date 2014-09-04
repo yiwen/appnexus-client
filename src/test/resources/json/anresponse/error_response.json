@@ -1,0 +1,10 @@
+{
+    "response": {
+        "error_id": "SYNTAX",
+        "error": "site id not found: 2516",
+        "error_description": null,
+        "error_code": "NOTFOUND_SITE",
+        "service": "placement",
+        "method": "POST"
+    }
+}

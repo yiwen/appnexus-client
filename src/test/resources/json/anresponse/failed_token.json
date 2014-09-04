@@ -1,0 +1,30 @@
+{
+    "response": {
+        "error_id": "UNAUTH",
+        "error": "No match found for user/pass",
+        "error_description": "the username/password value is not valid",
+        "error_code": "INVALID_LOGIN",
+        "service": "auth",
+        "method": "POST",
+        "dbg_info": {
+            "instance": "01.hbapi.client03.lax1",
+            "slave_hit": false,
+            "db": "master",
+            "parent_dbg_info": {
+                "instance": "01.api.client03.lax1",
+                "slave_hit": false,
+                "db": "master",
+                "time": 5.8720111846924,
+                "version": "1.14.16",
+                "warnings": [],
+                "start_microtime": 1391528159.9638
+            },
+            "awesomesauce_cache_used": false,
+            "count_cache_used": false,
+            "warnings": [],
+            "time": 111.85693740845,
+            "start_microtime": 1391528159.8649,
+            "version": "1.14.36"
+        }
+    }
+}
