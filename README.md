@@ -20,11 +20,11 @@ How to use it:
 
 
     ```
-      <dependency>
-                    <groupId>com.millennialmedia</groupId>
-                    <artifactId>appnexus-client</artifactId>
-                    <version>1.0-SNAPSHOT</version>
-               </dependency>
+    <dependency>
+        <groupId>com.millennialmedia</groupId>
+        <artifactId>appnexus-client</artifactId>
+        <version>1.0</version>
+   </dependency>
     ```
     
 
