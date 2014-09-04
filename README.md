@@ -38,9 +38,6 @@ How to use it:
         }
     ```
 
-3.  
-4.  Call ```client.makeGetRequestToAN``` etc to make request
-
 
 
  
