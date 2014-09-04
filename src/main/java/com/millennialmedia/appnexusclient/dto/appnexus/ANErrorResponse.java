@@ -1,5 +1,6 @@
 package com.millennialmedia.appnexusclient.dto.appnexus;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -19,6 +20,10 @@ public class ANErrorResponse implements ANResponseIf {
     @JsonProperty("error_description")
     private String errorDescription;
 
+
+    @JsonIgnore
+    private String rawResponse;
+
     public String getErrorId() {
         return errorId;
     }
@@ -37,6 +42,14 @@ public class ANErrorResponse implements ANResponseIf {
 
     public boolean hasError() {
         return true;
+    }
+
+    public String getRawResponse() {
+        return rawResponse;
+    }
+
+    public void setRawResponse(String rawResponse) {
+        this.rawResponse = rawResponse;
     }
 
     @Override

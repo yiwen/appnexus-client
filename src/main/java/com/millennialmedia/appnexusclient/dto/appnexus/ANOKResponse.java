@@ -1,5 +1,7 @@
 package com.millennialmedia.appnexusclient.dto.appnexus;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Created with IntelliJ IDEA.
  * User: yiwengao
@@ -11,6 +13,9 @@ package com.millennialmedia.appnexusclient.dto.appnexus;
 public class ANOKResponse implements ANResponseIf {
     private String status;
 
+    @JsonIgnore
+    private String rawResponse;
+
     public String getStatus() {
         return status;
     }
@@ -19,4 +24,11 @@ public class ANOKResponse implements ANResponseIf {
         return false;
     }
 
+    public String getRawResponse() {
+        return rawResponse;
+    }
+
+    public void setRawResponse(String rawResponse) {
+        this.rawResponse = rawResponse;
+    }
 }

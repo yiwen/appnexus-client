@@ -11,6 +11,8 @@ public class ANStringResponse implements ANResponseIf {
 
     private String responseStr;
 
+    private String rawResponse;
+
     public ANStringResponse(String responseStr) {
         this.responseStr = responseStr;
     }
@@ -25,5 +27,13 @@ public class ANStringResponse implements ANResponseIf {
 
     public boolean hasError() {
       return false;
+    }
+
+    public String getRawResponse() {
+        return rawResponse;
+    }
+
+    public void setRawResponse(String rawResponse) {
+        this.rawResponse = rawResponse;
     }
 }

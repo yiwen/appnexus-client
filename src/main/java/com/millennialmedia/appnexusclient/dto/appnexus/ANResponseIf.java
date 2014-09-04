@@ -10,4 +10,6 @@ package com.millennialmedia.appnexusclient.dto.appnexus;
 public interface ANResponseIf {
 
     public boolean hasError();
+
+    public String getRawResponse();
 }

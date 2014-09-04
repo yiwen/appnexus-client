@@ -113,7 +113,7 @@ public abstract class AppnexusClientService implements AppnexusClientServiceIf {
                     TypeReference responseType = new TypeReference<ANResponse<ANErrorResponse>>() {};
                     ANResponse<ANErrorResponse> aNerroResponse= mapper.readValue(responseBody, responseType);
                     if (aNerroResponse == null) {
-                        throw new LoginException("Unparseable auth failed response");
+                        throw new LoginException("Unparseable auth failed response:" + response);
                     }
                     if(aNerroResponse.getResponse().getErrorId()!=null){
                         throw new LoginException(aNerroResponse.getResponse().getErrorId() + ":"+ aNerroResponse.getResponse().getErrorDescription() + "| code:" +aNerroResponse.getResponse().getErrorCode());
@@ -159,6 +159,7 @@ public abstract class AppnexusClientService implements AppnexusClientServiceIf {
                 ANResponse<ANOKResponse> anResponse= mapper.readValue(response, responseType);
                 if (anResponse != null && anResponse.getResponse()!=null){
                     if ("OK".equals(anResponse.getResponse().getStatus())){
+                        anResponse.getResponse().setRawResponse(response);
                         return anResponse.getResponse();
                     } else {
                         // if it can be parsed into an error response
@@ -166,12 +167,12 @@ public abstract class AppnexusClientService implements AppnexusClientServiceIf {
                         if (errorResponse != null){
                             return errorResponse;
                         } else {
-                            throw new ANErrorResponseException("Unparseable Response");
+                            throw new ANErrorResponseException("Unparseable Response:" + response);
                         }
 
                     }
                 } else {
-                    throw new ANErrorResponseException("Unparseable Response");
+                    throw new ANErrorResponseException("Unparseable Response:" + response);
                 }
             } else if ("text/html".equals(contentType)) {
                 ANStringResponse stringResponse = new ANStringResponse(response);
@@ -194,6 +195,7 @@ public abstract class AppnexusClientService implements AppnexusClientServiceIf {
         ANResponse<ANErrorResponse> anErroResponse= mapper.readValue(response, errorType);
 
         if (anErroResponse != null && anErroResponse.getResponse() != null && !anErroResponse.getResponse().isEmpty()) {
+            anErroResponse.getResponse().setRawResponse(response);
             return anErroResponse.getResponse();
         }
         return null;
