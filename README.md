@@ -7,7 +7,7 @@ Appnexus api requires an unexpired auth to be passed into the header for each ap
 the library also provides dto classes for both success response and error response, the end user can extend the success response ```ANOKResponse```  based on the response they are getting.
 
 Currenlty, it only handle two types of content-type of the response, 'applicaiton/json' and 'text/html'. When the content type is 
-'applicaiton/json', it will try to parse the response into the class you passed in, when the response is 'text/html', it will return the string as response.
+'applicaiton/json', it will try to parse the response into the class you passed in, when the response is 'text/html', it will return the string as response. When the response is parseable error response, it will return ```ANErrorResponse`` with all error information from appnexus.
 
 How to use it:
 
