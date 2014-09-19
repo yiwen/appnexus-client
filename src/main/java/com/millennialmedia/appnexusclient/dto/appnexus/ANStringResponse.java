@@ -9,20 +9,10 @@ package com.millennialmedia.appnexusclient.dto.appnexus;
  */
 public class ANStringResponse implements ANResponseIf {
 
-    private String responseStr;
-
     private String rawResponse;
 
-    public ANStringResponse(String responseStr) {
-        this.responseStr = responseStr;
-    }
-
-    public String getResponseStr() {
-        return responseStr;
-    }
-
-    public void setResponseStr(String responseStr) {
-        this.responseStr = responseStr;
+    public ANStringResponse(String rawResponse) {
+        this.rawResponse = rawResponse;
     }
 
     public boolean hasError() {

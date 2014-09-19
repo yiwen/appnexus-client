@@ -3,7 +3,7 @@ package com.millennialmedia.appnexusclient.service.exception;
 /**
  * Represents an error when an response with an error
  */
-public class ANErrorResponseException extends Exception {
+public class ANErrorResponseException extends ANClientRuntimeException {
     /**
      * Serial version UID.
      */

@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.millennialmedia.appnexusclient.dto.appnexus.*;
 import com.millennialmedia.appnexusclient.service.RequestType;
 import com.millennialmedia.appnexusclient.service.ServiceHttpClientIf;
+import com.millennialmedia.appnexusclient.service.exception.ANClientRuntimeException;
 import com.millennialmedia.appnexusclient.service.exception.ANErrorResponseException;
 import com.millennialmedia.appnexusclient.service.exception.LoginException;
 import org.apache.commons.collections.MultiMap;
@@ -59,7 +60,7 @@ public abstract class AppnexusClientService implements AppnexusClientServiceIf {
         return client;
     }
 
-    protected String getToken(ANAuthWrapper auth, String serviceEndpoint) throws LoginException, ANErrorResponseException {
+    protected String getToken(ANAuthWrapper auth, String serviceEndpoint) throws ANClientRuntimeException {
         if (auth == null) {
            throw new IllegalArgumentException("auth cannot be null");
         }
@@ -96,7 +97,7 @@ public abstract class AppnexusClientService implements AppnexusClientServiceIf {
         return appnexusToken;
     }
 
-    protected String callAuthenticationService(final ANAuthWrapper auth, final String serviceEndpoint) throws ANErrorResponseException, LoginException {
+    protected String callAuthenticationService(final ANAuthWrapper auth, final String serviceEndpoint) throws ANClientRuntimeException {
         try {
             TypeReference type = new TypeReference<ANResponse<ANTokenResponse>>(){};
             String postBody = mapper.writeValueAsString(auth);
@@ -137,7 +138,7 @@ public abstract class AppnexusClientService implements AppnexusClientServiceIf {
     }
 
     @SuppressWarnings("unchecked")
-    public ANResponseIf makeRequestToAN(ANAuthWrapper anAuth, String anUrl, RequestType requestType, String path, String postBody, TypeReference responseType, MultiMap headers) throws LoginException, ANErrorResponseException {
+    public ANResponseIf makeRequestToAN(ANAuthWrapper anAuth, String anUrl, RequestType requestType, String path, String postBody, TypeReference responseType, MultiMap headers) throws ANClientRuntimeException {
         String token = getToken(anAuth, anUrl);
 
         MultiMap newHeaders =  new MultiValueMap();
@@ -174,11 +175,10 @@ public abstract class AppnexusClientService implements AppnexusClientServiceIf {
                 } else {
                     throw new ANErrorResponseException("Unparseable Response:" + response);
                 }
-            } else if ("text/html".equals(contentType)) {
+            } else {
+                //TODO handle different content type
                 ANStringResponse stringResponse = new ANStringResponse(response);
                 return stringResponse;
-            } else {
-                throw new ANErrorResponseException("Unsupported Response content-type:" + contentType + "response: " + response);
             }
 
         } catch (IOException e) {
@@ -244,7 +244,7 @@ public abstract class AppnexusClientService implements AppnexusClientServiceIf {
             this.service = service;
         }
         public ANResponseIf makeRequest(RequestType requestType, String path, String postBody, TypeReference responseType,  MultiMap headers)
-                throws LoginException, ANErrorResponseException {
+                throws ANClientRuntimeException {
             return service.makeRequestToAN(anAuth, anUrl, requestType, path, postBody, responseType, headers);
         }
 

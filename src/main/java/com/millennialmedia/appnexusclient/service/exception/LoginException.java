@@ -6,7 +6,7 @@ package com.millennialmedia.appnexusclient.service.exception;
  * @author gyang
  * @since 1.0
  */
-public class LoginException extends Exception {
+public class LoginException extends ANClientRuntimeException {
     /**
      * Serial version UID.
      */
