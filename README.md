@@ -21,7 +21,7 @@ How to use it:
 
     ```
     <dependency>
-        <groupId>com.millennialmedia</groupId>
+        <groupId>com.appnexus.api</groupId>
         <artifactId>appnexus-client</artifactId>
         <version>1.0</version>
    </dependency>
